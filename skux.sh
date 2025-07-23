@@ -11,7 +11,7 @@ sudo apt install screen -y
 
 # Generate random 3-digit number (000-999)
 RAND_NUM=$(shuf -i 0-999 -n 1 | awk '{printf "%03d", $0}')
-RIG_NAME="rig_cakar$RAND_NUM"
+RIG_NAME="rig_cakar_gas"
 
 echo "Your mining rig name: $RIG_NAME"
 
