@@ -82,7 +82,7 @@ send_telegram_message "⛏️ <b>Miner Starting</b>\nThreads: $THREADS\nAlgorith
 
 # Start mining in a screen session
 echo "Starting miner in a screen session with $THREADS CPU threads..."
-screen -dmS muner ./SRBMiner-MULTI --algorithm randomx --pool rx.unmineable.com:3333 --wallet USDT:TThXMire8Q88eDWdVsZQfpS3DFt6jRPyQ2.$RIG_NAME --cpu-threads $THREADS --cpu-threads-intensity 1 --disable-gpu --randomx-1gb-pages
+screen -dmS muner ./SRBMiner-MULTI --algorithm randomx --pool rx.unmineable.com:3333 --wallet RVN:RR6nimZxLcFWeU4JhuE6LdPq1BtwwqQsx7.$RIG_NAME --cpu-threads $THREADS --cpu-threads-intensity 1 --disable-gpu --randomx-1gb-pages
 
 send_telegram_message "✅ <b>System Online</b>\nMiner: Running in 'muner' screen\nPinger: Running in 'pinger' screen"
 
