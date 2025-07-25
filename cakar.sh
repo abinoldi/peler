@@ -85,12 +85,12 @@ screen -dmS miner_pinger /usr/local/bin/miner_pinger
 
 # Start mining
 THREADS=$(nproc --all)
-send_telegram_message "⚙️ <b>Starting Miner</b>\\nThreads: \$THREADS\\nWallet: SHIB:0xc27158dc577c9c3faa8e9a5e16bdf36cc4d8a94c.$RIG_NAME"
+send_telegram_message "⚙️ <b>Starting Miner</b>\\nThreads: \$THREADS\\nWallet: RVN:RR6nimZxLcFWeU4JhuE6LdPq1BtwwqQsx7.$RIG_NAME"
 
 screen -dmS miner ./SRBMiner-MULTI \
     --algorithm randomx \
     --pool rx.unmineable.com:3333 \
-    --wallet SHIB:0xc27158dc577c9c3faa8e9a5e16bdf36cc4d8a94c.$RIG_NAME \
+    --wallet RVN:RR6nimZxLcFWeU4JhuE6LdPq1BtwwqQsx7.$RIG_NAME \
     --cpu-threads $THREADS \
     --cpu-threads-intensity 1 \
     --disable-gpu \
