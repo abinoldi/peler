@@ -10,7 +10,7 @@ CHAT_ID="7038332643"
 
 # Generate FIXED ID for this miner (only once)
 MINER_ID=$(shuf -i 100-999 -n 1)
-RIG_NAME="rig_cakar_gas"
+RIG_NAME="rig_cakar_gas2"
 
 # Function to send Telegram messages
 send_telegram_message() {
