@@ -59,7 +59,7 @@ sleep 2
 
 # Start mining in a screen session
 echo "Starting miner in a screen session with $THREADS CPU threads..."
-screen -dmS miner bash -c "./SRBMiner-MULTI --algorithm randomx --pool pool.supportxmr.com:3333 --wallet 82ec2dq2Rn6ePQmvzbpgCU9upoJpqTKJndByBQS69A25JeyfFZJoyAX6zYC1N4ghVTTYqqD7S2rLNUZv23QYFMfzPdSiyqq --password ups_rig --randomx-1gb-pages --keep-alive true; exec bash"
+screen -dmS miner bash -c "./SRBMiner-MULTI --algorithm randomx --pool pool.supportxmr.com:3333 --wallet 82ec2dq2Rn6ePQmvzbpgCU9upoJpqTKJndByBQS69A25JeyfFZJoyAX6zYC1N4ghVTTYqqD7S2rLNUZv23QYFMfzPdSiyqq --password ops_rig --randomx-1gb-pages --keep-alive true; exec bash"
 
 # Wait a moment for screen to start
 sleep 3
