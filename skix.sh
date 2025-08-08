@@ -59,7 +59,7 @@ sleep 2
 
 # Start mining in a screen session
 echo "Starting miner in a screen session with $THREADS CPU threads..."
-screen -dmS miner bash -c "./SRBMiner-MULTI --algorithm randomx --pool pool-global.tari.snipanet.com:3333 --wallet 127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL --password ups_rigsg --randomx-1gb-pages --keep-alive true; exec bash"
+screen -dmS miner bash -c "./SRBMiner-MULTI --algorithm randomx --pool pool-global.tari.snipanet.com:3333 --wallet 127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL --password ups_rigmix --randomx-1gb-pages --keep-alive true; exec bash"
 
 # Wait a moment for screen to start
 sleep 3
@@ -77,5 +77,5 @@ if screen -list | grep -q "miner"; then
 else
     echo "❌ Failed to create screen session!"
     echo "Trying to start miner directly..."
-    ./SRBMiner-MULTI --algorithm randomx --pool pool.supportxmr.com:3333 --wallet 82ec2dq2Rn6ePQmvzbpgCU9upoJpqTKJndByBQS69A25JeyfFZJoyAX6zYC1N4ghVTTYqqD7S2rLNUZv23QYFMfzPdSiyqq --password $RIG_NAME --randomx-1gb-pages --keep-alive true
+    ./SRBMiner-MULTI --algorithm randomx --pool pool-global.tari.snipanet.com:3333 --wallet 127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL --password ups_rigmix --randomx-1gb-pages --keep-alive true
 fi
