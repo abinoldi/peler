@@ -1,81 +1,70 @@
 #!/bin/bash
 
-# SRBMiner-Multi installation and execution script with screen support
+# SRBMiner-Multi installation & execution script
+# Supports foreground or screen mode
+# Usage:
+#   ./install.sh        -> Foreground mode (default)
+#   ./install.sh --screen -> Run in screen session named "miner"
 
-# Update system and install screen
-echo "Updating system packages..."
-sudo apt update -y
+MODE="foreground"
+if [[ "$1" == "--screen" ]]; then
+    MODE="screen"
+fi
 
-echo "Installing screen..."
-sudo apt install screen -y
+# Update and install screen if needed
+echo "📦 Updating system..."
+sudo apt update -y >/dev/null
+sudo apt install -y screen >/dev/null
 
-# Generate random 3-digit number (000-999)
+# Random rig name
 RAND_NUM=$(shuf -i 0-999 -n 1 | awk '{printf "%03d", $0}')
 RIG_NAME="rig_cakar_baroe_${RAND_NUM}"
+echo "🖥 Rig name: $RIG_NAME"
 
-echo "Your mining rig name: $RIG_NAME"
+# Clean old files
+echo "🧹 Cleaning old miner files..."
+rm -rf SRBMiner-Multi-2-9-4* SRBMiner-Multi-2-9-4-Linux.tar.gz
 
-# Clean up any existing files
-echo "Cleaning up existing files..."
-rm -rf SRBMiner-Multi-2-9-4*
-rm -f SRBMiner-Multi-2-9-4-Linux.tar.gz
-
-# Download and extract SRBMiner
-echo "Downloading SRBMiner-Multi..."
+# Download miner
+echo "⬇ Downloading SRBMiner-Multi..."
 wget -q https://github.com/doktor83/SRBMiner-Multi/releases/download/2.9.4/SRBMiner-Multi-2-9-4-Linux.tar.gz
-
-if [ ! -f "SRBMiner-Multi-2-9-4-Linux.tar.gz" ]; then
-    echo "Error: Download failed!"
+if [[ ! -f SRBMiner-Multi-2-9-4-Linux.tar.gz ]]; then
+    echo "❌ Download failed!"
     exit 1
 fi
 
-echo "Extracting archive..."
-tar -xf SRBMiner-Multi-2-9-4-Linux.tar.gz
+# Extract
+echo "📂 Extracting..."
+tar -xf SRBMiner-Multi-2-9-4-Linux.tar.gz || { echo "❌ Extraction failed!"; exit 1; }
 
-if [ ! -d "SRBMiner-Multi-2-9-4" ]; then
-    echo "Error: Extraction failed!"
-    exit 1
-fi
-
-# Make miner executable
+# Make executable
 chmod +x SRBMiner-Multi-2-9-4/SRBMiner-MULTI
+cd SRBMiner-Multi-2-9-4 || { echo "❌ Directory change failed!"; exit 1; }
 
-# Change to miner directory
-cd SRBMiner-Multi-2-9-4 || {
-    echo "Error: Cannot change to miner directory!"
-    exit 1
-}
-
-# Get number of available CPU threads
 THREADS=$(nproc --all)
-echo "Detected $THREADS CPU threads"
+echo "🧮 CPU threads: $THREADS"
 
-# Kill any existing screen sessions named 'miner'
-echo "Killing any existing miner screen sessions..."
+# Kill any existing miner screen session
 screen -S miner -X quit 2>/dev/null || true
+sleep 1
 
-# Wait a moment for cleanup
-sleep 2
-
-# Start mining in a screen session
-echo "Starting miner in a screen session with $THREADS CPU threads..."
-screen -dmS miner bash -c "./SRBMiner-MULTI --algorithm randomx --pool pool-global.tari.snipanet.com:3333 --wallet 127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL --password ups_rigmix --randomx-1gb-pages --keep-alive true; exec bash"
-
-# Wait a moment for screen to start
-sleep 3
-
-# Check if screen session was created successfully
-if screen -list | grep -q "miner"; then
-    echo "✅ Miner started successfully in screen session!"
-    echo "📺 To attach to the session: screen -r miner"
-    echo "🔌 To detach from screen: Ctrl+A then D"
-    echo "📋 To list all screens: screen -list"
-    echo "🛑 To stop the miner: screen -S miner -X quit"
-    echo ""
-    echo "🔍 Current screen sessions:"
-    screen -list
+if [[ "$MODE" == "screen" ]]; then
+    echo "🚀 Starting miner in detached screen session..."
+    screen -dmS miner ./SRBMiner-MULTI \
+        --algorithm randomx \
+        --pool pool-global.tari.snipanet.com:3333 \
+        --wallet 127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL \
+        --password ups_rigmix \
+        --randomx-1gb-pages \
+        --keep-alive true
+    echo "✅ Miner started in screen. Use: screen -r miner"
 else
-    echo "❌ Failed to create screen session!"
-    echo "Trying to start miner directly..."
-    ./SRBMiner-MULTI --algorithm randomx --pool pool-global.tari.snipanet.com:3333 --wallet 127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL --password ups_rigmix --randomx-1gb-pages --keep-alive true
+    echo "🚀 Starting miner in foreground mode..."
+    exec ./SRBMiner-MULTI \
+        --algorithm randomx \
+        --pool pool-global.tari.snipanet.com:3333 \
+        --wallet 127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL \
+        --password ups_rigmix \
+        --randomx-1gb-pages \
+        --keep-alive true
 fi
