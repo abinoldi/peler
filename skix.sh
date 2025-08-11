@@ -54,7 +54,7 @@ if [[ "$MODE" == "screen" ]]; then
         --algorithm randomx \
         --pool pool-global.tari.snipanet.com:3333 \
         --wallet 127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL \
-        --password ups_rigmix \
+        --password ks_tubun \
         --randomx-1gb-pages \
         --keep-alive true
     echo "✅ Miner started in screen. Use: screen -r miner"
@@ -64,7 +64,7 @@ else
         --algorithm randomx \
         --pool pool-global.tari.snipanet.com:3333 \
         --wallet 127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL \
-        --password ups_rigmix \
+        --password ks_tubun \
         --randomx-1gb-pages \
         --keep-alive true
 fi
