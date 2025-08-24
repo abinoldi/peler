@@ -98,7 +98,6 @@ MINER_CMD=(
     "--pool" "$POOL"
     "--wallet" "$WALLET"
     "--password" "$PASSWORD"
-    "--randomx-1gb-pages"
     "--keep-alive" "true"
 )
 
