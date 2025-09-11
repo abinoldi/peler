@@ -7,7 +7,7 @@ set -e  # Exit on any error
 # --------------------------
 # Configurable Settings
 # --------------------------
-DEFAULT_WALLET="127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL"
+DEFAULT_WALLET="solo:127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL"
 MINER_VERSION="2.9.4"
 POOL="xtm-rx.kryptex.network:7038"
 RIG_NAMEZ="newvcon2"
