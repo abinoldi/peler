@@ -10,7 +10,7 @@ set -e  # Exit on any error
 DEFAULT_WALLET="127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL"
 MINER_VERSION="2.9.4"
 POOL="xtm-rx.kryptex.network:7038"
-PASSWORD="ks_tubun"
+RIG_NAMEZ="newvcon2"
 RIG_PREFIX="rig_cakar_baroe"
 
 # --------------------------
@@ -96,7 +96,7 @@ MINER_CMD=(
     "./SRBMiner-MULTI"
     "--algorithm" "randomx"
     "--pool" "$POOL"
-    "--wallet" "$WALLET/newvcon"
+    "--wallet" "$WALLET/$RIG_NAMEZ"
     "--keep-alive" "true"
 )
 
