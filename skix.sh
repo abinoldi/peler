@@ -10,7 +10,7 @@ set -e  # Exit on any error
 DEFAULT_WALLET="127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL"
 MINER_VERSION="2.9.7"
 POOL="xtm-rx.kryptex.network:7038"
-RIG_NAMEZ="vconcakar2"
+RIG_NAMEZ="vconcakar3"
 RIG_PREFIX="rig_cakar_baroe"
 
 # --------------------------
