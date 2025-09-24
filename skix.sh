@@ -97,6 +97,8 @@ MINER_CMD=(
     "--algorithm" "randomx"
     "--pool" "$POOL"
     "--wallet" "solo:$WALLET/$RIG_NAMEZ"
+    "--disable-msr-tweaking"
+    "--disable-gpu"
     "--keep-alive" "true"
 )
 
