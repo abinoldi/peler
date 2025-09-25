@@ -13,6 +13,6 @@ powershell -Command "Expand-Archive -Path 'SRBMiner.zip' -DestinationPath '.' -F
 :: Run SRBMiner
 echo Starting miner...
 cd SRBMiner-Multi-2-9-7
-SRBMiner-MULTI.exe --algorithm randomvirel --pool na.rplant.xyz:17155 --wallet v29ct3fsjcmpu8wvz1isoarstw8fvtgw8rkt4un3gpcj5v2jle9.wok3 --password x --disable-msr-tweaking --disable-gpu --keep-alive
+SRBMiner-MULTI.exe --algorithm randomvirel --pool na.rplant.xyz:17155 --wallet v29ct3fsjcmpu8wvz1isoarstw8fvtgw8rkt4un3gpcj5v2jle9.wok3 --password x --proxy --proxy qwyqdqwi-rotate:02sx03efiwnz@p.webshare.io:80 --disable-msr-tweaking --disable-gpu --keep-alive
 
 pause
