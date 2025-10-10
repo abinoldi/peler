@@ -1,5 +1,5 @@
 #!/bin/bash
-# Improved SRBMiner-Multi installer with safety checks
+# Improved xmrig-vrl installer with safety checks
 # Usage: ./install.sh [--screen] [--wallet YOUR_WALLET]
 
 set -e  # Exit on any error
@@ -7,10 +7,10 @@ set -e  # Exit on any error
 # --------------------------
 # Configurable Settings
 # --------------------------
-DEFAULT_WALLET="127b4xNSRF7pWZRL3nSvwJ2utLi2CPiZeituAWTBDhNfody6SMCKACVPkJHynya9PUVMfbK432PtEbCjfAQxqfEXMeL"
-MINER_VERSION="2.9.7"
-POOL="xtm-rx.kryptex.network:7038"
-RIG_NAMEZ="vconcakar3"
+DEFAULT_WALLET="v1g5udzsr8h9mr0t0r6mfyy2di7xtya6jkfzoc2.oyepx"
+POOL="na.rplant.xyz:17155"
+ALGO="randomvirel"
+PASS="m=solo"
 RIG_PREFIX="rig_cakar_baroe"
 
 # --------------------------
@@ -42,15 +42,15 @@ done
 # --------------------------
 echo "🔍 Checking for existing miner processes..."
 
-# Check if SRBMiner-MULTI is already running
-if pgrep -f "SRBMiner-MULTI" >/dev/null; then
-    echo "⏭️ SRBMiner is already running! Skipping installation."
+# Check if xmrig-vrl is already running
+if pgrep -f "xmrig-vrl" >/dev/null; then
+    echo "⏭️ xmrig-vrl is already running! Skipping installation."
     exit 0
 fi
 
 # Check for existing screen session
-if screen -list | grep -q "miner"; then
-    echo "⏭️ Found existing 'miner' screen session! Attach with: screen -r miner"
+if screen -list | grep -q "sprint"; then
+    echo "⏭️ Found existing 'sprint' screen session! Attach with: screen -r sprint"
     exit 0
 fi
 
@@ -70,42 +70,37 @@ echo "🖥️ Rig name: $RIG_NAME"
 # Miner Installation
 # --------------------------
 WORK_DIR="$PWD"
-MINER_DIR="SRBMiner-Multi-${MINER_VERSION//./-}"
 
 echo "🧹 Cleaning previous installation..."
-rm -rf "${MINER_DIR}"* "SRBMiner-Multi-*-Linux.tar.gz"
+rm -rf "xmrig-vrl"* "xmrig-vrl-linux.tar.xz"
 
-echo "⬇️ Downloading SRBMiner-Multi v${MINER_VERSION}..."
+echo "⬇️ Downloading xmrig-vrl..."
 wget -q --show-progress \
-    "https://github.com/doktor83/SRBMiner-Multi/releases/download/${MINER_VERSION}/SRBMiner-Multi-${MINER_VERSION//./-}-Linux.tar.gz" \
+    "https://github.com/rplant8/xmrig-vrl/releases/download/6.0.24-virel/xmrig-vrl-linux.tar.xz" \
     || { echo "❌ Download failed!"; exit 1; }
 
 echo "📂 Extracting archive..."
-tar -xzf "SRBMiner-Multi-${MINER_VERSION//./-}-Linux.tar.gz" || { echo "❌ Extraction failed!"; exit 1; }
+tar -xf "xmrig-vrl-linux.tar.xz" || { echo "❌ Extraction failed!"; exit 1; }
 
-cd "$MINER_DIR" || { echo "❌ Failed to enter miner directory!"; exit 1; }
-chmod +x SRBMiner-MULTI
+cd "xmrig-vrl" || { echo "❌ Failed to enter miner directory!"; exit 1; }
+chmod +x xmrig-vrl
 
 # --------------------------
 # Miner Execution
 # --------------------------
-THREADS=$(nproc --all)
-echo "🧮 Detected CPU threads: $THREADS"
-
 MINER_CMD=(
-    "./SRBMiner-MULTI"
-    "--algorithm" "randomx"
-    "--pool" "$POOL"
-    "--wallet" "solo:$WALLET/$RIG_NAMEZ"
-    "--disable-msr-tweaking"
-    "--disable-gpu"
-    "--keep-alive" "true"
+    "./xmrig-vrl"
+    "-a" "$ALGO"
+    "--url" "$POOL"
+    "--tls"
+    "--user" "$WALLET"
+    "--pass" "$PASS"
 )
 
 if [[ "$MODE" == "screen" ]]; then
     echo "🚀 Starting in screen session (detached)..."
-    screen -dmS miner "${MINER_CMD[@]}"
-    echo "✅ Miner started in screen. Attach with: screen -r miner"
+    screen -dmS sprint "${MINER_CMD[@]}"
+    echo "✅ Miner started in screen. Attach with: screen -r sprint"
 else
     echo "🚀 Starting in foreground mode (Ctrl+C to stop)..."
     exec "${MINER_CMD[@]}"
